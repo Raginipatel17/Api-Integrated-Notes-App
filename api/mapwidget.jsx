@@ -23,7 +23,8 @@ export default function Mapwidget({place}) {
     "Amber Fort",
     "City Palace",
     "Jantar Mantar",
-    "Nahargarh Fort"
+    "Nahargarh Fort",
+    "Kalkaji mandir"
   ];
     
     const [data,setdata]=useState(null);
@@ -49,7 +50,7 @@ export default function Mapwidget({place}) {
       useEffect(()=>{
         if(matchplace){
           async function fetchdirection(){
-            const direction=await getlocation('Narela','kalka mandir');
+            const direction=await getlocation('Narela',matchplace);
             setdata(direction);
           }
         
@@ -59,7 +60,7 @@ export default function Mapwidget({place}) {
       if(!matchplace||!data) return null;
   return (
       
-  <div style={{ border: "1px solid gray", padding: "1rem", borderRadius: "10px" }}>
+  <div style={{ border: "1px solid gray", padding: "1rem", borderRadius: "10px", margin:"10px" }}>
       <h2>🗺️ Total distance: 
       {JSON.stringify(data?.routes[0]?.legs[0]?.distance?.text)||''}</h2>
       <h2>🗺️ Total time: 

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 export default function Calorie({ food }) {
   const eatableItems = [
     "Apple", "Banana", "Mango", "Grapes", "Strawberry", "Chips", "Biscuits",
     "Popcorn", "Samosa", "Chocolate", "Pizza", "Burger", "Biryani", "Pasta",
     "Paneer Butter Masala", "Ice Cream", "Gulab Jamun", "Cake", "Ladoo", "Kheer",
-    "Water", "Tea", "Coffee", "Juice", "Milkshake", "rice"
+    "Water", "Tea", "Coffee", "Juice", "Milkshake", "Rice"
   ];
 
   const [calorie, setCalorie] = useState(null);
@@ -13,12 +13,17 @@ export default function Calorie({ food }) {
   const object = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': 'FqkSwnvQ47ANr2OQaL+V/g==WayBdjFAkjvIZgD5'
+      "x-rapidapi-host": "nutrition-by-api-ninjas.p.rapidapi.com",
+      "x-rapidapi-key": "3550123eb6mshfda20e1a11da0bap10ee4djsn19efc7fd7bea"
     }
   };
 
-  const getCalories = async (item) => {
-    const response = await fetch(`https://api.calorieninjas.com/v1/nutrition?query=${item}`, object);
+  // now function takes foodName
+  const getCalories = async () => {
+    const response = await fetch(
+      `https://nutrition-by-api-ninjas.p.rapidapi.com/v1/nutrition?query=${food}`,
+      object
+    );
     const result = await response.json();
     return result;
   };
@@ -29,11 +34,19 @@ export default function Calorie({ food }) {
   useEffect(() => {
     if (item) {
       async function fetchCalories() {
-        const data = await getCalories(item);
-        if (data.items.length > 0) {
-          setCalorie(data.items[0].calories);
-        } else {
-          setCalorie("Not Found");
+        try {
+          const data = await getCalories();
+          console.log("API response:", data);
+
+          // you may need to adjust according to API response
+          if (data.items && data.items.length > 0) {
+  setCalorie(data.items[0].calories);
+} else {
+  setCalorie("Not Found");
+}
+        } catch (error) {
+          console.error(error);
+          setCalorie("Error fetching data");
         }
       }
       fetchCalories();
@@ -42,9 +55,13 @@ export default function Calorie({ food }) {
     }
   }, [item]);
 
+  if (!item || !calorie) return null;
+
   return (
     <div>
-      {calorie === null ? "Loading..." : `Calories in ${item}: ${calorie}`}
+      {typeof calorie === "string"
+        ? calorie
+        : `Calories in ${item}: ${calorie}`}
     </div>
   );
 }

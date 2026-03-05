@@ -35,6 +35,7 @@ export function WeatherWidget({task}) {
     return data;
   };
     const outdoorKeywords = [
+      "go",
     "walk",
     "run",
     "jog",

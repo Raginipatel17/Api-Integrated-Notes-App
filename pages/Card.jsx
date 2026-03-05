@@ -5,12 +5,12 @@ import WeatherWidget from "../api/weatherwidget";
 export function Card({ data, deleteitem }) {
   const priorityColor = (e) => {
     if (e == "High") {
-      return "red";
+      return "#FA8072";
     }
     if (e == "Medium") {
-      return "green";
+      return "#89e783";
     }
-    return "yellow";
+    return "#d8ee68";
   };
   return (
     <div className="w-full grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -29,7 +29,7 @@ export function Card({ data, deleteitem }) {
 
           </div>
           <span
-            className="font-bold h-8 bg-red-500 rounded-lg ps-2 pe-2 cursor-pointer d-fixed"
+            className="font-bold h-8 bg-red-500 rounded-xl ps-2 pe-2 cursor-pointer d-fixed"
             onClick={() => deleteitem(index)}
             >
             x
