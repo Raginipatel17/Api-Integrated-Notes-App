@@ -28,7 +28,7 @@ export function WeatherWidget({task}) {
 
   
   const getWeather = async (city) => {
-    const apiKey="c0fe3f6c0daa49748a193524253004";
+    const apiKey=import.meta.env.VITE_WEATHER_RAPIDAPI_KEY;
     const res = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}}`);
     let data = await res.json();
     console.log(data);

@@ -14,7 +14,7 @@ export default function Calorie({ food }) {
     method: 'GET',
     headers: {
       "x-rapidapi-host": "nutrition-by-api-ninjas.p.rapidapi.com",
-      "x-rapidapi-key": "3550123eb6mshfda20e1a11da0bap10ee4djsn19efc7fd7bea"
+      "x-rapidapi-key": import.meta.env.VITE_CALORIE_RAPIDAPI_KEY
     }
   };
 

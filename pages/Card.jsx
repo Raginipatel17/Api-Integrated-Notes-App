@@ -25,7 +25,7 @@ export function Card({ data, deleteitem }) {
           {task.notelist}
          <WeatherWidget task={task.notelist}/>
          <Mapwidget place={task.notelist}/>
-         {/* <Calorie food={task.notelist}/> */}
+         <Calorie food={task.notelist}/>
 
           </div>
           <span
